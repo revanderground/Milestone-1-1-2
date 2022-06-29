@@ -31,22 +31,41 @@ const images = [
 
 const carouselWrapper = document.querySelector('.carousel-wrapper');
 
+
+let index=0;
 images.forEach((element) => {
     console.log(element);
 
-    const newImage = createImage(element);
-    slide.innerHTML="";
-    function createImage(){
-        let slide= document.createElement('div');
-        
-        slide.innerHTML= `<div class="carousel-image-container pb-3 col-8 mx-auto" >
-        <img src="${element.url}" id="main-image"></img>
-        <div class="titolo">${element.title}</div>
-        <div class="descrizione col-10"${element.description}</div>
-     </div>` ;
-      carouselWrapper.append(slide);
-   
-    }
+    createImage(element, index);
+ 
+   index++;
 
 });
 
+function createImage(element, index){
+    let slide= document.createElement('div');
+    let visible="";
+    if (index==0){
+        visible="on";
+    } 
+    slide.innerHTML= `<div class="carousel-image-container pb-3 col-8 mx-auto ${visible}" >
+    <img src="${element.url}" id="main-image"></img>
+    <div class="titolo">${element.title}</div>
+    <div class="descrizione col-10">${element.description}</div>
+ </div>` ;
+  carouselWrapper.append(slide);
+
+}
+
+
+// function nextChangeImage(){
+//     myImage.setAttribute("src",element);
+//     index++;
+//     if (index > 5) {index=0};
+// }
+
+// function previousChangeImage(){
+//     myImage.setAttribute("src", element);
+//     index--;
+//     if (index < 0) {index=5};
+// }
