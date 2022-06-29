@@ -30,42 +30,62 @@ const images = [
 
 
 const carouselWrapper = document.querySelector('.carousel-wrapper');
+const nextButton = document.getElementById("next-button");
+const prevButton = document.getElementById("previous-button");
+
+let i=0;
+images.forEach((element,index) => {
+    console.log(element,index);
+
+    createImage(element, i);
 
 
-let index=0;
-images.forEach((element) => {
-    console.log(element);
 
-    createImage(element, index);
- 
-   index++;
+    i++;
+
 
 });
+
+
+
 
 function createImage(element, index){
     let slide= document.createElement('div');
     let visible="";
-    if (index==0){
+   
+   
+    if (i==0){
         visible="on";
     } 
-    slide.innerHTML= `<div class="carousel-image-container pb-3 col-8 mx-auto ${visible}" >
+    
+
+    slide.innerHTML= `<div id= "current-image" class="carousel-image-container pb-3 col-8 mx-auto ${visible}" >
     <img src="${element.url}" id="main-image"></img>
     <div class="titolo">${element.title}</div>
     <div class="descrizione col-10">${element.description}</div>
  </div>` ;
+ 
   carouselWrapper.append(slide);
 
 }
 
 
-// function nextChangeImage(){
-//     myImage.setAttribute("src",element);
-//     index++;
-//     if (index > 5) {index=0};
-// }
 
-// function previousChangeImage(){
-//     myImage.setAttribute("src", element);
-//     index--;
-//     if (index < 0) {index=5};
-// }
+
+nextButton.addEventListener('click', function(index, images){
+    images[index].classList.remove("on");
+    index++;
+    if (index==images.length){
+        index=0;
+    }
+    images[index].classList.add("on");
+});
+
+prevButton.addEventListener('click', function(index, images){
+    images[index].classList.remove("on");
+    index--;
+    if (index==-1){
+        index=images.Length -1;
+    }
+    images[index].classìst.add("on");
+});
